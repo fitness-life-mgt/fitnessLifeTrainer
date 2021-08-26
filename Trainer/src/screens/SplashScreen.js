@@ -14,7 +14,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import LogInScreen from './LogInScreen';
+// import LogInScreen from './LogInScreen';
 
 const SplashScreen = ({navigation}) => {
   return (

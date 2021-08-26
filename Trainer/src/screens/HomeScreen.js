@@ -6,6 +6,7 @@ import {
   Dimensions,
   Image,
   ScrollView,
+  Button,
 } from 'react-native';
 import colors from '../config/colors';
 // import {WeekCalendar} from 'react-native-calendars';
@@ -27,22 +28,33 @@ const HomeScreen = () => {
               resizeMode="stretch"
             />
           </View>
-          <View>
-            <Image
-              source={require('../assests/images/homeImage.png')}
-              style={styles.image_home}
-              resizeMode="stretch"
-            />
+          <View style={styles.alternativeLayoutButtonContainer}>
+          <Button
+            // onPress={this._onPressButton}
+            title="Appoinments"
+            color="#084887"
+          />
+          <Button
+            // onPress={this._onPressButton}
+            title="Diet Plans"
+            color="#084887"
+          />
           </View>
-          <Text style={styles.text_home}>Appointments                     Diet Plans</Text>
-          <View>
-            <Image
-              source={require('../assests/images/homeImage2.png')}
-              style={styles.image_home2}
-              resizeMode="stretch"
-            />
+        
+          <View style={styles.alternativeLayoutButtonContainer}>
+          <Button
+            // onPress={this._onPressButton}
+            title="Self Progress"
+            color="#084887"
+          />
+          <Button
+            // onPress={this._onPressButton}
+            title="Workouts"
+            color="#084887"
+
+          />
           </View>
-          <Text style={styles.text_home2}>Schedules                    Self Progress</Text>
+          
         </ScrollView>
       </View>
     </View>
@@ -105,6 +117,29 @@ const styles = StyleSheet.create({
     top: -168,
     fontWeight: 'bold',
   },
+
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+   },
+   buttonContainer: {
+     margin: 10
+   },
+   alternativeLayoutButtonContainer: {
+     
+    marginTop: 20,
+    marginLeft: 10,
+    marginRight: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom:50,
+
+     flexDirection: 'row',
+     justifyContent: 'space-between',
+     
+ 
+   }
+
 });
 
 export default HomeScreen;
