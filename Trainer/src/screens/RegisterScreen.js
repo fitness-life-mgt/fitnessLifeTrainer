@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
+
 import {
   View,
   Text,
@@ -17,64 +19,55 @@ import Feather from 'react-native-vector-icons/Feather';
 import colors from '../config/colors';
 import PhoneInput from 'react-native-phone-number-input';
 
-const RegisterScreen = navigation => {
+const RegisterScreen = ({navigation}) => {
+  const [fnametext, setfnametext] = useState('');
+  const [lnametext, setlnametext] = useState('');
+  const [emailtext, setemailtext] = useState('');
+  const [passwordtext, setpasswordtext] = useState('');
+  const [cpasswordtext, setcpasswordtext] = useState('');
+
+  const SignUp = (fname,lname, email, password, cpassword) => {
+    const x = {
+      fname: fname,
+      lname:lname,
+      email: email,
+      password: password,
+      cpassword: cpassword,
+    };
+
+    axios
+      .post('http://localhost:8088/register', x)
+      .then(res => {
+        if (res.data == 'SUCCESS') {
+          navigation.navigate('MainTabScreen');
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   const [data, setData] = React.useState({
-    username: '',
+    email: '',
     password: '',
+    confirm_password: '',
     check_textInputChange: false,
     secureTextEntry: true,
+    confirm_secureTextEntry: true,
   });
 
-  const textInputChangeFirstName = val => {
-    if (val.length !== 0) {
+  const textInputChange = val => {
+    if (val.lenght != 0) {
       setData({
         ...data,
-        first_name: val,
-        check_textInputChangeFirstName: true,
-        // isValidUser: true,
+        email: val,
+        check_textInputChange: true,
       });
     } else {
       setData({
         ...data,
-        first_name: val,
-        check_textInputChangeFirstName: false,
-        // isValidUser: false,
-      });
-    }
-  };
-
-  const textInputChangeLastName = val => {
-    if (val.length !== 0) {
-      setData({
-        ...data,
-        first_name: val,
-        check_textInputChangeLastName: true,
-        // isValidUser: true,
-      });
-    } else {
-      setData({
-        ...data,
-        first_name: val,
-        check_textInputChangeLastName: false,
-        // isValidUser: false,
-      });
-    }
-  };
-
-  const textInputChangeEmail = val => {
-    if (val.length !== 0) {
-      setData({
-        ...data,
-        first_name: val,
-        check_textInputChangeEmail: true,
-        // isValidUser: true,
-      });
-    } else {
-      setData({
-        ...data,
-        first_name: val,
-        check_textInputChangeEmail: false,
-        // isValidUser: false,
+        email: val,
+        check_textInputChange: false,
       });
     }
   };
@@ -85,11 +78,10 @@ const RegisterScreen = navigation => {
       password: val,
     });
   };
-
   const handleConfirmPasswordChange = val => {
     setData({
       ...data,
-      password: val,
+      confirm_password: val,
     });
   };
 
@@ -103,9 +95,14 @@ const RegisterScreen = navigation => {
   const updateConfirmSecureTextEntry = () => {
     setData({
       ...data,
-      secureTextEntry: !data.secureTextEntry,
+      confirm_secureTextEntry: !data.confirm_secureTextEntry,
     });
   };
+
+
+
+
+
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -118,14 +115,16 @@ const RegisterScreen = navigation => {
           </Text>
         </View>
         <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-          <Text style={styles.text_footer}>Username</Text>
+          <Text style={styles.text_footer}>First name</Text>
           <View style={styles.action}>
             <FontAwesome name="user" color="grey" size={20} />
             <TextInput
               placeholder="Your Username"
               style={styles.textInput}
               autoCapitalize="none"
-              onChangeText={val => textInputChangeFirstName(val)}
+              name="fnametext"
+              value={fnametext}
+              onChangeText={val =>  setfnametext(val)}
             />
             {data.check_textInputChangeFirstName ? (
               <Animatable.View animation="bounceIn">
@@ -135,14 +134,16 @@ const RegisterScreen = navigation => {
           </View>
 
           {/* To get the last name */}
-          <Text style={styles.text_footer}>Full Name</Text>
+          <Text style={styles.text_footer}>Last Name</Text>
           <View style={styles.action}>
             <FontAwesome name="user-o" color="grey" size={20} />
             <TextInput
               placeholder="Your Full Name"
               style={styles.textInput}
               autoCapitalize="none"
-              onChangeText={val => textInputChangeLastName(val)}
+              name="lnametext"
+              value={lnametext}
+              onChangeText={val => setlnametext(val)}
             />
             {data.check_textInputChangeLastName ? (
               <Animatable.View animation="bounceIn">
@@ -158,7 +159,9 @@ const RegisterScreen = navigation => {
               placeholder="Your Email"
               style={styles.textInput}
               autoCapitalize="none"
-              onChangeText={val => textInputChangeEmail(val)}
+              name="emailtext"
+              value={emailtext}
+              onChangeText={val => setemailtext(val)}
             />
             {data.check_textInputChangeEmail ? (
               <Animatable.View animation="bounceIn">
@@ -193,7 +196,9 @@ const RegisterScreen = navigation => {
               secureTextEntry={data.secureTextEntry ? true : false}
               style={styles.textInput}
               autoCapitalize="none"
-              onChangeText={val => handlePasswordChange(val)}
+              name="passwordtext"
+              value={passwordtext}
+              onChangeText={val => setpasswordtext(val)}
             />
             <TouchableOpacity onPress={updateSecureTextEntry}>
               {data.secureTextEntry ? (
@@ -212,7 +217,9 @@ const RegisterScreen = navigation => {
               secureTextEntry={data.secureTextEntry ? true : false}
               style={styles.textInput}
               autoCapitalize="none"
-              onChangeText={val => handleConfirmPasswordChange(val)}
+              name="cpasswordtext"
+              value={cpasswordtext}
+              onChangeText={val => setcpasswordtext(val)}
             />
             <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
               {data.secureTextEntry ? (
@@ -224,6 +231,10 @@ const RegisterScreen = navigation => {
           </View>
 
           <View style={styles.button}>
+          <TouchableOpacity
+            onPress={() =>
+              SignUp(fnametext,lnametext, emailtext, passwordtext, cpasswordtext)
+            }>
             <LinearGradient
               colors={[colors.color3, colors.color4]}
               style={styles.signIn}>
@@ -238,8 +249,9 @@ const RegisterScreen = navigation => {
                 Register
               </Text>
             </LinearGradient>
-
+            </TouchableOpacity>
             <TouchableOpacity
+              
               // onPress={() => navigation.navigate('SplashScreen')}
               style={[
                 styles.signIn,
