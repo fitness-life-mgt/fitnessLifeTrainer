@@ -20,7 +20,7 @@ router.post("/",(req,res)=>{
     
   // query for users
  
-  let sqlCheckEmail = `SELECT * FROM owners WHERE email = ?`;
+  let sqlCheckEmail = `SELECT * FROM user WHERE email = ?`;
 
   // Simple validation
 
@@ -40,7 +40,7 @@ db.query(sqlCheckEmail,email,(err,user)=>{
     if(user.length>0){
          return res.status(400).json({msg:"this user already"});
     }else{
-        let sql=`insert into user(fname,lname,email,password) values(?,?,?)`;
+        let sql=`insert into user(fname,lname,email,password) values(?,?,?,?)`;
  bcrypt.hash(password,saltRounds,(err,hash)=>{  
 
     if(err){
@@ -49,7 +49,7 @@ db.query(sqlCheckEmail,email,(err,user)=>{
 
   
     
-    db.query(sql,[name,email,hash],(err,result)=>{
+    db.query(sql,[fname,lname,email,hash],(err,result)=>{
         console.log(err);
     });
    
