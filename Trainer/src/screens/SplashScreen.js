@@ -1,10 +1,11 @@
 import React from 'react';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {
   View,
   Text,
   StyleSheet,
   Dimensions,
-  TouchableOpacity,
+  
   StatusBar,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
@@ -12,9 +13,8 @@ import colors from '../config/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-// import LogInScreen from './LogInScreen';
+
+
 
 const SplashScreen = ({navigation}) => {
   return (
@@ -30,17 +30,20 @@ const SplashScreen = ({navigation}) => {
         />
       </View>
       <Animatable.View style={styles.footer} animation="fadeInUpBig">
-        <Text style={styles.title}>Your Gym is Waiting for You..!</Text>
+        <Text style={styles.title}>Start the Triner</Text>
+        
         <View style={styles.button}>
-          <TouchableOpacity
-          // onPress={() => navigation.navigate('SignInScreen')}
-          >
+          <TouchableOpacity 
+          onPress={() => navigation.navigate('LoginScreen')}>
             <LinearGradient
-              // onPress={() => navigation.navigate('LoginScreen')}
               colors={[colors.color3, colors.color4]}
               style={styles.signIn}>
-              <Text style={styles.textSign}>Get Started</Text>
-              <MaterialIcons name="navigate-next" color="#fff" size={20} />
+              <Text style={styles.textSign}>Get Start</Text>
+              <MaterialIcons
+                // name="keyboard-arrow-right"
+                color="#000"
+                size={20}
+              />
             </LinearGradient>
           </TouchableOpacity>
         </View>
@@ -49,20 +52,7 @@ const SplashScreen = ({navigation}) => {
   );
 };
 
-// const Stack = createStackNavigator();
 
-// class FitnessLife extends Component {
-//   render() {
-//     return (
-//       <NavigationContainer>
-//         <Stack.Navigator>
-//           <Stack.Screen component={SignInScreen} />
-//           {/* <Stack.Screen component={Page02} /> */}
-//         </Stack.Navigator>
-//       </NavigationContainer>
-//     );
-//   }
-// }
 
 export default SplashScreen;
 
