@@ -16,28 +16,42 @@ import Feather from 'react-native-vector-icons/Feather';
 import colors from '../config/colors';
 import {color} from 'react-native-reanimated';
 
-const LogInScreen = navigation => {
+const LoginScreen = ({navigation}) => {
+  const [emailtext, setemailtext] = useState('');
+  const [passwordtext, setpasswordtext] = useState('');
+
+  const login = (email, password) => {
+    const x = {
+      email: email,
+      password: password,
+    };
+    axios.post('http://localhost:8088/login',x).then(res=>{
+      if(res.data==='SUCCESS')navigation.navigate('MainTabScreen');
+
+    }).catch(error=>{
+      console.log(error);
+    });
+  };
+
   const [data, setData] = React.useState({
-    username: '',
+    email: '',
     password: '',
     check_textInputChange: false,
     secureTextEntry: true,
   });
 
   const textInputChange = val => {
-    if (val.length !== 0) {
+    if (val.lenght != 0) {
       setData({
         ...data,
         email: val,
         check_textInputChange: true,
-        // isValidUser: true,
       });
     } else {
       setData({
         ...data,
-        username: val,
+        email: val,
         check_textInputChange: false,
-        // isValidUser: false,
       });
     }
   };
@@ -70,7 +84,10 @@ const LogInScreen = navigation => {
             placeholder="Your Email"
             style={styles.textInput}
             autoCapitalize="none"
-            onChangeText={val => textInputChange(val)}
+            name="emailtext"
+            value={emailtext}
+            onChangeText={val => setemailtext(val)}
+            
           />
           {data.check_textInputChange ? (
             <Animatable.View animation="bounceIn">
@@ -87,7 +104,9 @@ const LogInScreen = navigation => {
             secureTextEntry={data.secureTextEntry ? true : false}
             style={styles.textInput}
             autoCapitalize="none"
-            onChangeText={val => handlePasswordChange(val)}
+            name="passwordtext"
+            value={passwordtext}
+            onChangeText={val => setpasswordtext(val)}
           />
           <TouchableOpacity onPress={updateSecureTextEntry}>
             {data.secureTextEntry ? (
