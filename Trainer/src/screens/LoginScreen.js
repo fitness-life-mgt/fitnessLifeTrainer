@@ -1,4 +1,6 @@
-import React from 'react';
+
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import {
   View,
   Text,
@@ -26,7 +28,7 @@ const LoginScreen = ({navigation}) => {
       password: password,
     };
     axios.post('http://localhost:8088/login',x).then(res=>{
-      if(res.data==='SUCCESS')navigation.navigate('MainTabScreen');
+      if(res.data==='SUCCESS')navigation.navigate('Tabs');
 
     }).catch(error=>{
       console.log(error);
@@ -117,6 +119,7 @@ const LoginScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.button}>
+        <TouchableOpacity onPress={()=>  login(emailtext, passwordtext)     }>
           <LinearGradient
             colors={[colors.color3, colors.color4]}
             style={styles.signIn}>
@@ -130,36 +133,16 @@ const LoginScreen = ({navigation}) => {
               Log In
             </Text>
           </LinearGradient>
-
-          <TouchableOpacity
-            // onPress={() => navigation.navigate('SplashScreen')}
-            style={[
-              styles.signIn,
-              // eslint-disable-next-line react-native/no-inline-styles
-              {
-                borderColor: colors.color3,
-                borderWidth: 1,
-                marginTop: 15,
-              },
-            ]}>
-            <Text
-              style={[
-                styles.textSign,
-                {
-                  color: colors.color3,
-                },
-              ]}>
-              {' '}
-              Register{' '}
-            </Text>
           </TouchableOpacity>
+
+         
         </View>
       </Animatable.View>
     </View>
   );
 };
 
-export default LogInScreen;
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {

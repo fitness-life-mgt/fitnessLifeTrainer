@@ -16,6 +16,9 @@ import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 
 import SplashScreen from './SplashScreen';
 import LoginScreen from './LoginScreen';
+import RegisterScreen from './RegisterScreen';
+import Tabs from '../navigate/Tabs';
+
 
 const RootStack = createStackNavigator();
 
@@ -54,8 +57,29 @@ const theme = {
               },
             }}
           />
-         
-          
+
+          <RootStack.Screen
+            name="RegisterScreen"
+            component={RegisterScreen}
+            options={{
+              title: '',
+              
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
+         <RootStack.Screen
+            name="Tabs"
+            component={Tabs}
+            options={{
+              title: '',
+              
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
           
           
         </RootStack.Navigator>
@@ -63,3 +87,5 @@ const theme = {
     );
   };
   export default RootStackScreen;
+
+  
