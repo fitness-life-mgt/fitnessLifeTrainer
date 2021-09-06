@@ -11,7 +11,7 @@ import colors from '../config/colors';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}) => {
   return (
     <View style={styles.view}>
       <View style={styles.header}>
@@ -36,9 +36,13 @@ const ProfileScreen = () => {
           </View>
         </Animatable.View>
         <View style={styles.button_package}>
+        
           <LinearGradient
+         
             colors={[colors.color3, colors.color4]}
             style={styles.package}>
+             <TouchableOpacity 
+          onPress={() => navigation.navigate('EditProfile')}>
             <Text
               style={[
                 styles.textPackage,
@@ -48,6 +52,7 @@ const ProfileScreen = () => {
               ]}>
               Edit Profile
             </Text>
+          </TouchableOpacity>
           </LinearGradient>
 
           <LinearGradient

@@ -18,7 +18,10 @@ import SplashScreen from './SplashScreen';
 import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
 import Tabs from '../navigate/Tabs';
-
+import Approve from './Approve';
+import AppoinmentList from './AppoinmentList';
+import Dietplans from './Dietplans';
+import EditProfile from './EditProfile';
 
 const RootStack = createStackNavigator();
 
@@ -80,6 +83,51 @@ const theme = {
               },
             }}
           />
+           <RootStack.Screen
+            name="Approve"
+            component={Approve}
+            options={{
+              title: '',
+              
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="AppoinmentList"
+            component={AppoinmentList}
+            options={{
+              title: '',
+              
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
+           <RootStack.Screen
+            name="Dietplans"
+            component={Dietplans}
+            options={{
+              title: '',
+              
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="EditProfile"
+            component={EditProfile}
+            options={{
+              title: '',
+              
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
+        
           
           
         </RootStack.Navigator>

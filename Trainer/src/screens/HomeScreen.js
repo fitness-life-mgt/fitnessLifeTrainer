@@ -1,4 +1,5 @@
 import React from 'react';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {
   View,
   Text,
@@ -9,9 +10,11 @@ import {
   Button,
 } from 'react-native';
 import colors from '../config/colors';
+import LinearGradient from 'react-native-linear-gradient';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 // import {WeekCalendar} from 'react-native-calendars';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   return (
     <View style={styles.view}>
       <View style={styles.header}>
@@ -29,12 +32,88 @@ const HomeScreen = () => {
             />
           </View>
           <View style={styles.alternativeLayoutButtonContainer}>
+          <View style={styles.button}>
+          <TouchableOpacity 
+          onPress={() => navigation.navigate('AppoinmentList')}>
+            <LinearGradient
+              colors={[colors.color3, colors.color4]}
+              >
+              <Text >Appointments</Text>
+              <MaterialIcons
+                // name="keyboard-arrow-right"
+                color="#000"
+                size={20}
+              />
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.button}>
+          <TouchableOpacity 
+          onPress={() => navigation.navigate('Dietplans')}>
+            <LinearGradient
+              colors={[colors.color3, colors.color4]}
+              >
+              <Text >Diet Plans</Text>
+              <MaterialIcons
+                // name="keyboard-arrow-right"
+                color="#000"
+                size={20}
+              />
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>  
+
+        
+        </View>
+
+        <View style={styles.alternativeLayoutButtonContainer}>
+          <View style={styles.button}>
+          <TouchableOpacity 
+          onPress={() => navigation.navigate('AppoinmentList')}>
+            <LinearGradient
+              colors={[colors.color3, colors.color4]}
+              >
+              <Text >Get Start</Text>
+              <MaterialIcons
+                // name="keyboard-arrow-right"
+                color="#000"
+                size={20}
+              />
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.button}>
+          <TouchableOpacity 
+          onPress={() => navigation.navigate('AppoinmentList')}>
+            <LinearGradient
+              colors={[colors.color3, colors.color4]}
+              >
+              <Text >Get Start</Text>
+              <MaterialIcons
+                // name="keyboard-arrow-right"
+                color="#000"
+                size={20}
+              />
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>  
+
+        
+        </View>
+
+          {/* <View style={styles.alternativeLayoutButtonContainer}>
           <Button
+      
+          onPress={() => navigation.navigate('AppoinmentList')}
             // onPress={this._onPressButton}
             title="Appoinments"
             color="#084887"
+            
           />
           <Button
+           onPress={() => navigation.navigate('Dietplans')}
             // onPress={this._onPressButton}
             title="Diet Plans"
             color="#084887"
@@ -53,7 +132,7 @@ const HomeScreen = () => {
             color="#084887"
 
           />
-          </View>
+          </View> */}
           
         </ScrollView>
       </View>
@@ -125,6 +204,10 @@ const styles = StyleSheet.create({
    buttonContainer: {
      margin: 10
    },
+   button: {
+    alignItems: 'flex-end',
+    marginTop: 30,
+  },
    alternativeLayoutButtonContainer: {
      
     marginTop: 20,

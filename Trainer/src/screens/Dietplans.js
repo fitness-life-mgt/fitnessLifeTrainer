@@ -9,7 +9,7 @@ import {
 import colors from '../config/colors';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default function AppointmentList({navigation}) {
+export default function AppointmentList() {
   const [people, setPeople] = useState([
     {name: 'upadhi', key: '1'},
     {name: 'upadhi', key: '2'},
