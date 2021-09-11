@@ -9,7 +9,7 @@ import {
 import colors from '../config/colors';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default function Dietplans({navigation}) {
+export default function AppointmentList({navigation}) {
   const [people, setPeople] = useState([
     {name: 'upadhi', key: '1'},
     {name: 'upadhi', key: '2'},
@@ -27,7 +27,7 @@ export default function Dietplans({navigation}) {
         
         return(
           <TouchableOpacity 
-          onPress={() => navigation.navigate('ApproveDietPlan')}>
+          onPress={() => navigation.navigate('Approve')}>
           <View key= {item.key}> 
           <Text style={styles.item}>{item.name}</Text>
           

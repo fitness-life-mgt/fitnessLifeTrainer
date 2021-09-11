@@ -19,6 +19,7 @@ import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
 import Tabs from '../navigate/Tabs';
 import Approve from './Approve';
+import ApproveDietPlan from './ApproveDietPlan';
 import AppoinmentList from './AppoinmentList';
 import Dietplans from './Dietplans';
 import EditProfile from './EditProfile';
@@ -86,6 +87,17 @@ const theme = {
            <RootStack.Screen
             name="Approve"
             component={Approve}
+            options={{
+              title: '',
+              
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="ApproveDietPlan"
+            component={ApproveDietPlan}
             options={{
               title: '',
               
