@@ -19,7 +19,7 @@ router.post("/",(req,res)=>{
 
       
     //sql for user
-    let sqlCheckEmail=`SELECT *FROM user WHERE email=?`;
+    let sqlCheckEmail=`SELECT *FROM trainer WHERE email=?`;
 
    
     //check for existing user
