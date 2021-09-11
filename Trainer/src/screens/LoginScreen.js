@@ -122,10 +122,11 @@ const LoginScreen = ({navigation}) => {
         <TouchableOpacity onPress={()=>  login(emailtext, passwordtext)     }>
           <LinearGradient
             colors={[colors.color3, colors.color4]}
-            style={styles.signIn}>
+            //style={styles.signIn}
+            >
             <Text
               style={[
-                styles.textSign,
+                styles.textLog,
                 {
                   color: colors.color5,
                 },
@@ -133,10 +134,32 @@ const LoginScreen = ({navigation}) => {
               Log In
             </Text>
           </LinearGradient>
-          </TouchableOpacity>
-
-         
+          </TouchableOpacity> 
         </View>
+        <View style={styles.buttonReg}>
+          <TouchableOpacity
+              
+               onPress={() => navigation.navigate('RegisterScreen')}
+              style={[
+                styles.signIn,
+                // eslint-disable-next-line react-native/no-inline-styles
+                {
+                  //borderColor: colors.color3,
+                  //borderWidth: 1,
+                  marginTop: 10,
+                },
+              ]}>
+              <Text
+                style={[
+                  styles.textReg,
+                  {
+                    color:  colors.color3,
+                  },
+                ]}>
+                Register
+              </Text>
+            </TouchableOpacity>
+          </View>
       </Animatable.View>
     </View>
   );
@@ -202,17 +225,43 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    marginTop: 50,
+    //marginTop: 10,
+    borderColor: colors.color3,
+    backgroundColor: colors.color3,
+    borderWidth: 1,
+    marginTop: 25,
+    borderRadius: 10,
+    padding: 12,
+    
+  },
+  buttonReg: {
+    alignItems: 'center',
+    borderColor: colors.color3,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    marginTop: 20,
+    borderRadius: 10,
+   // padding: 5,
+    
   },
   signIn: {
     width: '100%',
-    height: 50,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
   },
-  textSign: {
+  textLog: {
     fontSize: 18,
     fontWeight: 'bold',
+    backgroundColor: colors.color3,
+    alignItems: 'center',
+  },
+  textReg: {
+    fontSize: 19,
+    fontWeight: 'bold',
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    
   },
 });
