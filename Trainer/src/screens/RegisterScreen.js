@@ -23,16 +23,21 @@ const RegisterScreen = ({navigation}) => {
   const [fnametext, setfnametext] = useState('');
   const [lnametext, setlnametext] = useState('');
   const [emailtext, setemailtext] = useState('');
+  const [phonetext, setphonetext] = useState('');
   const [passwordtext, setpasswordtext] = useState('');
   const [cpasswordtext, setcpasswordtext] = useState('');
 
-  const SignUp = (fname,lname, email, password, cpassword) => {
+  
+
+  const SignUp = (firstName,lastName, email, telephone, password, cpassword) => {
     const x = {
-      fname: fname,
-      lname:lname,
+      firstName: firstName,
+      lastName:lastName,
       email: email,
+      telephone: telephone,
       password: password,
       cpassword: cpassword,
+    
     };
 
     axios
@@ -170,7 +175,7 @@ const RegisterScreen = ({navigation}) => {
             ) : null}
           </View>
           {/* To get the phone number */}
-          {/* <Text style={styles.text_footer}>Contact No.</Text>
+           <Text style={styles.text_footer}>Contact No.</Text>
           <View style={styles.action}>
             <FontAwesome name="phone" color="grey" size={20} />
 
@@ -178,14 +183,16 @@ const RegisterScreen = ({navigation}) => {
               placeholder="Your Contact Number"
               style={styles.textInput}
               autoCapitalize="none"
-              //   onChangeText={val => textInputChange(val)}
+              name="phonetext"
+              value={phonetext}
+                 onChangeText={val => setphonetext(val)}
             />
             {data.check_textInputChange ? (
               <Animatable.View animation="bounceIn">
                 <Feather name="check-circle" color={colors.color2} size={20} />
               </Animatable.View>
             ) : null}
-          </View> */}
+          </View>
 
           {/* password */}
           <Text style={styles.text_footer}>Password</Text>
@@ -233,11 +240,12 @@ const RegisterScreen = ({navigation}) => {
           <View style={styles.button}>
           <TouchableOpacity
             onPress={() =>
-              SignUp(fnametext,lnametext, emailtext, passwordtext, cpasswordtext)
+              SignUp(fnametext,lnametext, emailtext, phonetext, passwordtext, cpasswordtext)
             }>
             <LinearGradient
               colors={[colors.color3, colors.color4]}
-              style={styles.signIn}>
+              //style={styles.signIn}
+              >
               <Text
                 style={[
                   styles.textSign,
@@ -250,23 +258,25 @@ const RegisterScreen = ({navigation}) => {
               </Text>
             </LinearGradient>
             </TouchableOpacity>
-            <TouchableOpacity
+          </View>
+          <View style={styles.buttonLog}>
+          <TouchableOpacity
               
-              // onPress={() => navigation.navigate('SplashScreen')}
+               onPress={() => navigation.navigate('LoginScreen')}
               style={[
                 styles.signIn,
                 // eslint-disable-next-line react-native/no-inline-styles
                 {
-                  borderColor: colors.color3,
-                  borderWidth: 1,
-                  marginTop: 15,
+                  //borderColor: colors.color3,
+                  //borderWidth: 1,
+                  marginTop: 10,
                 },
               ]}>
               <Text
                 style={[
-                  styles.textSign,
+                  styles.textLog,
                   {
-                    color: colors.color3,
+                    color:  colors.color3,
                   },
                 ]}>
                 Log In
@@ -346,17 +356,45 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    marginTop: 10,
+    //marginTop: 10,
+    borderColor: colors.color3,
+    backgroundColor: colors.color3,
+    borderWidth: 1,
+    marginTop: 15,
+    borderRadius: 10,
+    padding: 12,
+    
+  },
+  buttonLog: {
+    alignItems: 'center',
+    borderColor: colors.color3,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    marginTop: 20,
+    borderRadius: 10,
+   // padding: 5,
+    
   },
   signIn: {
     width: '100%',
-    height: 50,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    //borderRadius: 10,
+    
   },
   textSign: {
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: 'bold',
+    backgroundColor: colors.color3,
+    alignItems: 'center',
+    
+  },
+  textLog: {
+    fontSize: 19,
+    fontWeight: 'bold',
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    
   },
 });
