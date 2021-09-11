@@ -14,11 +14,6 @@ import LinearGradient from 'react-native-linear-gradient';
 const ProfileScreen = ({navigation}) => {
   return (
     <View style={styles.view}>
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.headerText}>Profile</Text>
-        </View>
-      </View>
       <View style={styles.body}>
         <Animatable.View style={styles.topBody} animation="fadeInDownBig">
           <View style={styles.image_container}>
@@ -30,9 +25,8 @@ const ProfileScreen = ({navigation}) => {
           </View>
           <View style={styles.body_details}>
             {/* <Text style={styles.textDetails}>Name :</Text> */}
-            <Text style={styles.textDetailsLarge}>John Fernando</Text>
-            <Text style={styles.textDetailsMedium}>John@example.com</Text>
-            <Text style={styles.textDetailsSmall}>(0771231234)</Text>
+            <Text style={styles.textDetailsLarge}>Kasun Lakmal</Text>
+            <Text style={styles.textDetailsMedium}>kasun@flife.com</Text>
           </View>
         </Animatable.View>
         <View style={styles.button_package}>
@@ -42,7 +36,7 @@ const ProfileScreen = ({navigation}) => {
             colors={[colors.color3, colors.color4]}
             style={styles.package}>
              <TouchableOpacity 
-          onPress={() => navigation.navigate('EditProfile')}>
+              onPress={() => navigation.navigate('EditProfile')}>
             <Text
               style={[
                 styles.textPackage,
@@ -124,7 +118,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.color2,
     borderBottomLeftRadius: 35,
     borderBottomRightRadius: 35,
-    flex: 3.2,
+    flex: 4,
+   // height: 50,
   },
   lowBody: {
     flex: 3,
@@ -140,6 +135,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   image_container: {
+    marginTop: 20,
     top: 10,
     alignItems: 'center',
   },
@@ -155,6 +151,7 @@ const styles = StyleSheet.create({
     fontFamily: 'roboto',
     color: colors.color5,
     textAlign: 'center',
+    marginTop: 15,
   },
   textDetailsMedium: {
     fontSize: 20,
