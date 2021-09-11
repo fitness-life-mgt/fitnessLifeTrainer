@@ -11,20 +11,21 @@ const  saltRounds=10;
 
 
 router.post("/",(req,res)=>{
-    const fname=req.body.fname;
-    const lname=req.body.lname;
+    const firstName=req.body.firstName;
+    const lastName=req.body.lastName;
     const email=req.body.email;
+    const telephone=req.body.telephone;
     const password=req.body.password;
     const cpassword=req.body.cpassword;
-
     
+      
   // query for users
  
-  let sqlCheckEmail = `SELECT * FROM user WHERE email = ?`;
+  let sqlCheckEmail = `SELECT * FROM trainer WHERE email = ?`;
 
   // Simple validation
 
-    if(!fname||!lname||!email||!password||!cpassword){
+    if(!email||!firstName||!lastName||! telephone||!password||!cpassword){
         return res.status(400).json({msg:"Please enter all fields"});
 
     }
@@ -40,7 +41,7 @@ db.query(sqlCheckEmail,email,(err,user)=>{
     if(user.length>0){
          return res.status(400).json({msg:"this user already"});
     }else{
-        let sql=`insert into user(fname,lname,email,password) values(?,?,?,?)`;
+        let sql=`insert into trainer(firstName,lastName,email,telephone,password) values(?,?,?,?,?)`;
  bcrypt.hash(password,saltRounds,(err,hash)=>{  
 
     if(err){
@@ -49,7 +50,7 @@ db.query(sqlCheckEmail,email,(err,user)=>{
 
   
     
-    db.query(sql,[fname,lname,email,hash],(err,result)=>{
+    db.query(sql,[firstName,lastName,email,telephone,hash],(err,result)=>{
         console.log(err);
     });
    
