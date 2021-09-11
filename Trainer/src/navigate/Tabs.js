@@ -6,7 +6,7 @@ import colors from '../config/colors';
 
 import HomeScreen from '../screens/HomeScreen';
 import WorkoutScreen from '../screens/WorkoutScreen';
-import MusicScreen from '../screens/MusicScreen';
+import MusicScreen from '../screens/MemberScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 // import {Colors} from 'react-native/Libraries/NewAppScreen';
 
@@ -26,21 +26,12 @@ const Tabs = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name="Workouts"
-        component={WorkoutScreen}
-        options={{
-          tabBarLabel: 'Workouts',
-          tabBarIcon: ({color}) => (
-            <MaterialCommunityIcons name="dumbbell" color={color} size={26} />
-          ),
-        }}
-      />
+     
       <Tab.Screen
         name="Music"
         component={MusicScreen}
         options={{
-          tabBarLabel: 'Music',
+          tabBarLabel: 'Members',
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons name="music" color={color} size={26} />
           ),
