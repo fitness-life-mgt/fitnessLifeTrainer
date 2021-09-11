@@ -31,19 +31,22 @@ const HomeScreen = ({navigation}) => {
               resizeMode="stretch"
             />
           </View>
-          <View style={styles.alternativeLayoutButtonContainer}>
+          {/*<View style={styles.alternativeLayoutButtonContainer}>*/}
           <View style={styles.button}>
           <TouchableOpacity 
           onPress={() => navigation.navigate('AppoinmentList')}>
             <LinearGradient
               colors={[colors.color3, colors.color4]}
               >
-              <Text >Appointments</Text>
-              <MaterialIcons
-                // name="keyboard-arrow-right"
-                color="#000"
-                size={20}
-              />
+              <Text style={[
+                  styles.textBtn,
+                  // eslint-disable-next-line react-native/no-inline-styles
+                  {
+                    color: '#ffffff',
+                  },
+                ]}>
+                Appointment Requests
+                </Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>
@@ -54,55 +57,21 @@ const HomeScreen = ({navigation}) => {
             <LinearGradient
               colors={[colors.color3, colors.color4]}
               >
-              <Text >Diet Plans</Text>
-              <MaterialIcons
-                // name="keyboard-arrow-right"
-                color="#000"
-                size={20}
-              />
+              <Text style={[
+                  styles.textBtn,
+                  // eslint-disable-next-line react-native/no-inline-styles
+                  {
+                    color: '#ffffff',
+                  },
+                ]}>
+                Diet Plans Requests
+                </Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>  
 
         
-        </View>
-
-        <View style={styles.alternativeLayoutButtonContainer}>
-          <View style={styles.button}>
-          <TouchableOpacity 
-          onPress={() => navigation.navigate('AppoinmentList')}>
-            <LinearGradient
-              colors={[colors.color3, colors.color4]}
-              >
-              <Text >Get Start</Text>
-              <MaterialIcons
-                // name="keyboard-arrow-right"
-                color="#000"
-                size={20}
-              />
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.button}>
-          <TouchableOpacity 
-          onPress={() => navigation.navigate('AppoinmentList')}>
-            <LinearGradient
-              colors={[colors.color3, colors.color4]}
-              >
-              <Text >Get Start</Text>
-              <MaterialIcons
-                // name="keyboard-arrow-right"
-                color="#000"
-                size={20}
-              />
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>  
-
-        
-        </View>
-
+        {/*</View>*/}
           {/* <View style={styles.alternativeLayoutButtonContainer}>
           <Button
       
@@ -159,7 +128,7 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 8,
-    width: windowWidth,
+    width: '100%',
     backgroundColor: colors.color5,
   },
   headerText: {
@@ -174,8 +143,9 @@ const styles = StyleSheet.create({
   image_home: {
     height: 200,
     width: windowWidth,
+    marginBottom: 20,
   },
-  image_home2: {
+  /*image_home2: {
     top: -25,
     height: 150,
     width: windowWidth,
@@ -203,12 +173,33 @@ const styles = StyleSheet.create({
    },
    buttonContainer: {
      margin: 10
-   },
+   },*/
    button: {
-    alignItems: 'flex-end',
-    marginTop: 30,
+   // alignItems: 'flex-end',
+   // marginTop: 30,
+    width: '90%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    //marginTop: 10,
+    borderColor: colors.color3,
+    backgroundColor: colors.color3,
+    borderWidth: 1,
+    borderRadius: 10,
+    marginTop: 20,
+    marginBottom: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    padding: 20,
+    
   },
-   alternativeLayoutButtonContainer: {
+  textBtn: {
+    fontSize: 19,
+    fontWeight: 'bold',
+    backgroundColor: colors.color3,
+    alignItems: 'center',
+    
+  },
+   /*alternativeLayoutButtonContainer: {
      
     marginTop: 20,
     marginLeft: 10,
@@ -221,7 +212,7 @@ const styles = StyleSheet.create({
      justifyContent: 'space-between',
      
  
-   }
+   }*/
 
 });
 
