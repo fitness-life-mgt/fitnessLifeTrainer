@@ -28,7 +28,7 @@ const Tabs = () => {
       />
      
       <Tab.Screen
-        name="Music"
+        name="Members"
         component={MusicScreen}
         options={{
           tabBarLabel: 'Members',
