@@ -12,7 +12,7 @@ import {
 import colors from '../config/colors';
 import * as Animatable from 'react-native-animatable';
 
-export default function Approve() {
+export default function ApproveDietPlan() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>

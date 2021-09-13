@@ -9,7 +9,7 @@ import {
 import colors from '../config/colors';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default function Dietplans({navigation}) {
+export default function MemberScreen({navigation}) {
   const [people, setPeople] = useState([
     {name: 'upadhi', key: '1'},
     {name: 'upadhi', key: '2'},

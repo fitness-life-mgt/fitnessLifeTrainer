@@ -11,7 +11,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 
 
-export default function Dietplans({navigation}) {
+export default function MemberDetails({navigation}) {
  
   return(
     <View style = {StyleSheet.container}>

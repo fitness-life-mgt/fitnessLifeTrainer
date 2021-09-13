@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {
   View,
@@ -8,40 +8,28 @@ import {
 } from 'react-native';
 import colors from '../config/colors';
 import LinearGradient from 'react-native-linear-gradient';
-import { Component } from 'react';
-import axios from 'axios';
 
-
-export default class App extends Component{
-  
-  // constructor(props){
-  //   super(props)
-  // }
-  state ={
-    data:[],
-    // id,
-}
-componentDidMount(){
-  axios.get('http://localhost:8088/memberList').then(res=>{
-        console.log(res);
-      this.setState({
-        data:res.data,
-        });
-      });
-
-}
-render(){
+export default function Appoinment({navigation}) {
+  const [people, setPeople] = useState([
+    {name: 'upadhi', key: '1'},
+    {name: 'upadhi', key: '2'},
+    {name: 'upadhi', key: '3'},
+    {name: 'upadhi', key: '4'},
+    {name: 'upadhi', key: '5'},
+    {name: 'upadhi', key: '6'},
+    {name: 'upadhi', key: '7'},
+  ]);
 
   return(
     <View style = {StyleSheet.container}>
     <ScrollView>
-      {this.state.data.map( (item) => {
+      {people.map( (item) => {
         
         return(
           <TouchableOpacity 
           onPress={() => navigation.navigate('Approve')}>
-          <View > 
-          <Text style={styles.item}>{item.fname}</Text>
+          <View key= {item.key}> 
+          <Text style={styles.item}>{item.name}</Text>
           
           </View>
          </TouchableOpacity>
@@ -50,7 +38,6 @@ render(){
       </ScrollView>
     </View>
   );
-}
 }
 
 const styles = StyleSheet.create({
@@ -68,4 +55,4 @@ const styles = StyleSheet.create({
     fontSize: 24
 
   }
-});
+})
