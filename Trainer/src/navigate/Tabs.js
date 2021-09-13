@@ -8,6 +8,7 @@ import HomeScreen from '../screens/HomeScreen';
 import WorkoutScreen from '../screens/WorkoutScreen';
 import MusicScreen from '../screens/MemberScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import ContactusScreen from '../screens/ContactusScreen';
 // import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const Tab = createBottomTabNavigator();
@@ -42,6 +43,16 @@ const Tabs = () => {
         component={ProfileScreen}
         options={{
           tabBarLabel: 'Profile',
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="About Us"
+        component={ContactusScreen}
+        options={{
+          tabBarLabel: 'About Us',
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />
           ),
