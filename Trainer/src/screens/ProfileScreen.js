@@ -49,21 +49,8 @@ const ProfileScreen = ({navigation}) => {
           </TouchableOpacity>
           </LinearGradient>
 
-          <LinearGradient
-            colors={[colors.color3, colors.color4]}
-            style={styles.package}>
-            <Text
-              style={[
-                styles.textPackage,
-                {
-                  color: colors.color5,
-                },
-              ]}>
-              Settings
-            </Text>
-          </LinearGradient>
-
           <TouchableOpacity
+            onPress={() => navigation.navigate('SplashScreen')}
             style={[
               styles.package,
               // eslint-disable-next-line react-native/no-inline-styles
