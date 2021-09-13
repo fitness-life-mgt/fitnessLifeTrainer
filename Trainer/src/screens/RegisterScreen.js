@@ -122,7 +122,7 @@ const RegisterScreen = ({navigation}) => {
         <Animatable.View animation="fadeInUpBig" style={styles.footer}>
           <Text style={styles.text_footer}>First name</Text>
           <View style={styles.action}>
-            <FontAwesome name="user" color="grey" size={20} />
+          
             <TextInput
               placeholder="Your Username"
               style={styles.textInput}
@@ -175,7 +175,7 @@ const RegisterScreen = ({navigation}) => {
             ) : null}
           </View>
           {/* To get the phone number */}
-           <Text style={styles.text_footer}>Contact No.</Text>
+          <Text style={styles.text_footer}>Contact No.</Text>
           <View style={styles.action}>
             <FontAwesome name="phone" color="grey" size={20} />
 
