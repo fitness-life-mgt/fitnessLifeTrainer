@@ -30,7 +30,7 @@ const SplashScreen = ({navigation}) => {
         />
       </View>
       <Animatable.View style={styles.footer} animation="fadeInUpBig">
-        <Text style={styles.title}>Start the Triner</Text>
+        <Text style={styles.title}>Start your Training Journey...</Text>
         
         <View style={styles.button}>
           <TouchableOpacity 
