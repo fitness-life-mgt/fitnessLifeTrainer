@@ -21,21 +21,22 @@ import PhoneInput from 'react-native-phone-number-input';
 
 const ApproveDietPlan = ({navigation}) => {
  
-  const [phonetext, setphonetext] = useState('');
-  const [passwordtext, setpasswordtext] = useState('');
-  const [cpasswordtext, setcpasswordtext] = useState('');
+  const [bmealtext, setbmealtext] = useState('');
+  const [lmealtext, setlmealtext] = useState('');
+  const [dmealtext, setdmealtext] = useState('');
+  const [exmealtext, setexmealtext] = useState('');
+  const [suppletext, setsuppletext] = useState('');
 
-  
 
-  const Diet = ( bmeal, lmeal, dmeal, emeal, suplliment) => {
+  const Diet = ( bmeal, lmeal, dmeal, exmeal, supplement) => {
     const x = {
       
       
       bmeal: bmeal,
       lmeal: lmeal,
       dmeal: dmeal,
-      emeal: emeal,
-      suplliment: suplliment,
+      exmeal: exmeal,
+      supplement: supplement,
     
     };
 
@@ -104,9 +105,9 @@ const ApproveDietPlan = ({navigation}) => {
               style={styles.textInput}
               placeholder="food..."
               autoCapitalize="none"
-              name="emealtext"
-              value={emealtext}
-                 onChangeText={val => setemealtext(val)}
+              name="exmealtext"
+              value={exmealtext}
+                 onChangeText={val => setexmealtext(val)}
             />
           </View>
           <Text style={styles.text_footer}>Recommended Suppliments</Text>
@@ -115,16 +116,16 @@ const ApproveDietPlan = ({navigation}) => {
               style={styles.textInput}
               placeholder="..."
               autoCapitalize="none"
-              name="suplitext"
-              value={suplitext}
-                 onChangeText={val => setsuplitext(val)}
+              name="suppletext"
+              value={suppletext}
+                 onChangeText={val => setsuppletext(val)}
             />
           </View>
 
           <View style={styles.button}>
           <TouchableOpacity
             onPress={() =>
-              Diet( datetext, timetext, cpasswordtext)
+              Diet( bmealtext, lmealtext, dmealtext, exmealtext, suppletext)
             }>
             <LinearGradient
               colors={[colors.color3, colors.color4]}
