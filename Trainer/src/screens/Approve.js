@@ -1,102 +1,144 @@
-import React from 'react';
-import {Formik} from 'formik';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
+
 import {
-  StyleSheet,
-  Button,
-  TextInput,
   View,
   Text,
+  TouchableOpacity,
+  TextInput,
+  Platform,
+  StyleSheet,
   StatusBar,
   ScrollView,
 } from 'react-native';
-import colors from '../config/colors';
 import * as Animatable from 'react-native-animatable';
+import LinearGradient from 'react-native-linear-gradient';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
+// import {Colors} from 'react-native/Libraries/NewAppScreen';
+import colors from '../config/colors';
+import PhoneInput from 'react-native-phone-number-input';
 
-export default function Approve() {
+const Approve = ({navigation}) => {
+ 
+  const [datetext, setdatetext] = useState('');
+  const [timetext, settimetext] = useState('');
+  const [zoomtext, setzoomtext] = useState('');
+
+  
+
+  const Appionment  = ( date, time,zoom) => {
+    const x = {
+      
+      date: date,
+      time: time,
+      zoom: zoom,
+    
+    };
+
+    axios.post('http://localhost:8088/approve',x).then(res=>{
+      if(res.data==='SUCCESS')navigation.navigate('Tabs');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+
+
   return (
-    <View style={styles.container}>
+    
+      <View style={styles.container}>
       <View style={styles.header}>
         <StatusBar backgroundColor={colors.color2} barStyle="light-content" />
-        <Text style={styles.text_header}> Appointment</Text>
+        <Text style={styles.text_header}>Give Appoinment</Text>
       </View>
 
-      <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+        <Animatable.View animation="fadeInUpBig" style={styles.footer}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Formik
-            initialValues={{Trainername: '', AccountNo: '', Payment: '', Zoom: ''}}
-            onSubmit={(values, actions) => {
-              actions.resetForm();
-              console.log(values);
-            }}>
-            {props => (
-              <View>
-                <Text style={styles.text_footer}>Trainer Name</Text>
-                <View style={styles.action}>
-                  <TextInput
-                    style={styles.textInput}
-                    placeholder="Your Name"
-                    onChangeText={props.handleChange('Trainername')}
-                    value={props.values.Trainername}
-                  />
-                </View>
+          {/* To get the phone number */}
+        <View>
+          <Text style={styles.text_footer}>Date of Appoinment </Text>
+          <View style={styles.action}>
 
-                <Text style={styles.text_footer}>Account Number</Text>
-                <View style={styles.action}>
-                  <TextInput
-                    style={styles.textInput}
-                    placeholder="Account Number"
-                    onChangeText={props.handleChange('AccountNo')}
-                    value={props.values.AccountNo}
-                  />
-                </View>
+            <TextInput
+              style={styles.textInput}
+              placeholder="DD/MM/YYYY"
+              autoCapitalize="none"
+              name="datetext"
+              value={datetext}
+                 onChangeText={val => setdatetext(val)}
+            />
+          </View>
 
-                <Text style={styles.text_footer}>Payment Amount</Text>
-                <View style={styles.action}>
-                  <TextInput
-                    style={styles.textInput}
-                    placeholder="Payment Amount"
-                    onChangeText={props.handleChange('Payment')}
-                    value={props.values.Payment}
-                  />
-                </View>
+          {/* password */}
+          <Text style={styles.text_footer}>Time of Appointment</Text>
+          <View style={styles.action}>
+            <TextInput
+              style={styles.textInput}
+              placeholder="HH:MM"
+              autoCapitalize="none"
+              name="timetext"
+              value={timetext}
+              onChangeText={val => settimetext(val)}
+            />
+          </View>
+          <Text style={styles.text_footer}>Zoom link</Text>
+          <View style={styles.action}>
+            <TextInput
+              style={styles.textInput}
+              placeholder="link"
+              autoCapitalize="none"
+              name="zoomtext"
+              value={zoomtext}
+              onChangeText={val => setzoomtext(val)}
+            />
+          </View>
 
-                <Text style={styles.text_footer}>Zoom Link</Text>
-                <View style={styles.action}>
-                  <TextInput
-                    style={styles.textInput}
-                    placeholder="1"
-                    onChangeText={props.handleChange('Zoom')}
-                    value={props.values.Zoom}
-                  />
-                </View>
-
-                <View style={styles.button}>
-                  <Button
-                    title="Approve Appointment"
-                    color={colors.color3}
-                    onPress={props.handleSubmit}
-                  />
-                </View>
-              </View>
-            )}
-          </Formik>
-        </ScrollView>
-      </Animatable.View>
-    </View>
+          <View style={styles.button}>
+          <TouchableOpacity
+            onPress={() =>
+              Appionment( datetext, timetext,zoomtext)
+            }>
+            <LinearGradient
+              colors={[colors.color3, colors.color4]}
+              //style={styles.signIn}
+              >
+              <Text
+                style={[
+                  styles.textSign,
+                  // eslint-disable-next-line react-native/no-inline-styles
+                  {
+                    color: '#ffffff',
+                  },
+                ]}>
+                Send
+              </Text>
+            </LinearGradient>
+            </TouchableOpacity>
+          </View>
+          </View>
+          </ScrollView>
+        </Animatable.View>
+      </View>
+    
   );
-}
+};
+
+export default Approve;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1,
     backgroundColor: colors.color2,
   },
   header: {
     flex: 1,
     justifyContent: 'flex-end',
     paddingHorizontal: 20,
-    paddingBottom: 50,
+    paddingBottom: 20,
     fontFamily: 'roboto',
+    paddingTop: 30,
   },
   footer: {
     flex: 3,
@@ -107,10 +149,22 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
   },
   text_header: {
-    color: '#fff',
+    color: colors.color5,
     fontWeight: 'bold',
     fontSize: 30,
     fontFamily: 'roboto',
+  },
+  text_header_small: {
+    color: colors.color5,
+    // fontWeight: 'bold',
+    fontSize: 15,
+    fontFamily: 'roboto',
+  },
+  textDetailsMedium: {
+    fontSize: 20,
+    fontFamily: 'roboto',
+    color: colors.color1,
+    textAlign: 'left',
   },
   text_footer: {
     color: '#05375a',
@@ -119,11 +173,10 @@ const styles = StyleSheet.create({
   },
   action: {
     flexDirection: 'row',
-    // marginTop: 10,
+    //marginTop: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#f2f2f2',
-    // paddingBottom: ,
-    marginBottom: -5,
+    paddingBottom: -5,
   },
   actionError: {
     flexDirection: 'row',
@@ -134,9 +187,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    marginTop: -5,
+    marginTop: Platform.OS === 'ios' ? 0 : -12,
     paddingLeft: 10,
-    // paddingBottom: 40,
     color: '#05375a',
     // height: 20,
     // width: 100,
@@ -147,13 +199,30 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    marginTop: 20,
-    fontFamily: 'roboto',
     justifyContent: 'center',
-    // borderRadius: 100,
+    //marginTop: 10,
+    borderColor: colors.color3,
+    backgroundColor: colors.color3,
+    borderWidth: 1,
+    marginTop: 22,
+    borderRadius: 10,
+    padding: 10,
+    
+  },
+  signIn: {
+    width: '100%',
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    //borderRadius: 10,
+    
   },
   textSign: {
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: 'bold',
+    backgroundColor: colors.color3,
+    alignItems: 'center',
+    
   },
+  
 });
