@@ -11,8 +11,8 @@ router.post("/",(req,res)=>{
     const time=req.body.time;
     const zoom=req.body.zoom;
     
-        let sql=`UPDATE appoinment SET date = ?, time = ? zoom = ? WHERE email = 'lakmali@gmail.com' `;
-    
+        let sql=`INSERT INTO appointment (date, time, zoom, type, email, trainerId) values(?,?,?,'1','lakmali@gmail.com','1')`;
+        
     db.query(sql,[date ,time, zoom ],(err,result)=>{
         console.log(err);
     });
