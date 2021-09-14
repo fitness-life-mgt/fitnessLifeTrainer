@@ -5,10 +5,10 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  FlatList
+  SectionList
 } from 'react-native';
 
-
+import colors from '../config/colors';
 import axios from 'axios';
 
 
@@ -33,20 +33,26 @@ componentDidMount(){
 render(){
 
   return(
-   
-      <View >
-      <Text>upadhi</Text>
-        
+  
+      <View style={styles.container}>
+    
+      <ScrollView>
         {this.state.data.map((item) => (
-          <View>
-          <Text>{item.id}</Text>
          
-           
-          </View>
-        ))}
-          
+          <View style={styles.item}>
         
+          <Text  style={styles.text_header}>Member Name - {item.firstName}  {item.lastName}</Text>
+          <Text style={styles.text_header_small}>Age- {item.age}</Text>
+          <Text style={styles.text_header_small}>weight(Kg)- {item.weight}</Text>
+          <Text style={styles.text_header_small}>Height(cm) {item.height}</Text>
+         
+          </View>
+        
+        ))}
+        </ScrollView> 
+     
       </View>
+  
       ); 
   
 }
@@ -66,5 +72,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#B0E0E6',
     fontSize: 24
 
-  }
+  },
+
+  text_header_small: {
+    color: colors.color2,
+    // fontWeight: 'bold',
+    fontSize: 15,
+    fontFamily: 'roboto',
+  },
+
+  text_header: {
+    color: colors.color2,
+    fontWeight: 'bold',
+    fontSize: 25,
+    fontFamily: 'roboto',
+  },
 });
