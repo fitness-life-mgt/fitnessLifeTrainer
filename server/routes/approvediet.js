@@ -11,11 +11,11 @@ router.post("/",(req,res)=>{
     const lmeal=req.body.lmeal;
     const dmeal=req.body.dmeal;
     const exmeal=req.body.exmeal;
-    const suppliment=req.body.suppliment;
+    const supplement=req.body.supplement;
     
-        let sql=`UPDATE dietplan SET bmeal=?, lmeal=?, dmeal=?, exmeal=? , suppliment=? WHERE email = 'lakmali@gmail.com' `;
-
-    db.query(sql,[bmeal, lmeal,dmeal,exmeal , suppliment],(err,result)=>{
+        let sql=`INSERT INTO dietplan ( bmeal, lmeal,dmeal,exmeal, supplement, email) values(?,?,?,?,?, 'lakmali@gmail.com') `;
+        
+    db.query(sql,[bmeal, lmeal,dmeal,exmeal , supplement],(err,result)=>{
         console.log(err);
     });
     
