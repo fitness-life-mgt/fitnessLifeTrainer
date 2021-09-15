@@ -9,7 +9,7 @@ const db=require("../config/connection");
 
 router.get("/",(req,res)=>{
 
-    let sql= `SELECT * FROM appointment WHERE type=0`;
+    let sql= `SELECT member.firstName AS fname,member.lastName AS lname FROM member JOIN appointment ON appointment.email = member.email WHERE appointment.type =0`;
    db.query(sql,(err,result)=>{
         if(err) throw err;
         console.log(result);
