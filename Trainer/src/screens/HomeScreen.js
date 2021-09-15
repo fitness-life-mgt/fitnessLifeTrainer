@@ -70,6 +70,25 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>  
 
+        <View style={styles.button}>
+          <TouchableOpacity 
+          onPress={() => navigation.navigate('ApproveList')}>
+            <LinearGradient
+              colors={[colors.color3, colors.color4]}
+              >
+              <Text style={[
+                  styles.textBtn,
+                  // eslint-disable-next-line react-native/no-inline-styles
+                  {
+                    color: '#ffffff',
+                  },
+                ]}>
+                Approved Appointments
+                </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View> 
+
         
         {/*</View>*/}
           {/* <View style={styles.alternativeLayoutButtonContainer}>

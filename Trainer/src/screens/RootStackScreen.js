@@ -24,6 +24,7 @@ import AppoinmentList from './AppoinmentList';
 import Dietplans from './Dietplans';
 import EditProfile from './EditProfile';
 import MemberDetails from './MemberDetails';
+import ApproveList from './ApproveList';
 
 const RootStack = createStackNavigator();
 
@@ -143,6 +144,17 @@ const theme = {
           <RootStack.Screen
             name="MemberDetails"
             component={MemberDetails}
+            options={{
+              title: '',
+              
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="ApproveList"
+            component={ApproveList}
             options={{
               title: '',
               

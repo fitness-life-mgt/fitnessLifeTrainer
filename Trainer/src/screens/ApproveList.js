@@ -22,7 +22,7 @@ export default class App extends Component{
     // id,
 }
 componentDidMount(){
-  axios.get('http://localhost:8088/appointmentList' ).then(res=>{
+  axios.get('http://localhost:8088/approveList' ).then(res=>{
         console.log(res);
       this.setState({
         data:res.data,
@@ -35,20 +35,17 @@ render(){
   return(
   
       <View style={styles.container}>
-      <Text style={styles.text_header}> Appointment Requests</Text>
+      <Text style={styles.text_header}>Approved Appointment </Text>
       <ScrollView>
         {this.state.data.map((item) => (
          
           <View style={styles.item}>
-          <TouchableOpacity
-                    style={styles.signIn}
-                    onPress={() => this.props.navigation.push('Approve',
-                   )}>
+         
           <Text  style={styles. text_header_small}>Member Name - {item.email} </Text>
           {/* <Text style={styles.text_header_small}>Age- {item.age}</Text>
           <Text style={styles.text_header_small}>weight(Kg)- {item.weight}</Text>
           <Text style={styles.text_header_small}>Height(cm) {item.height}</Text> */}
-          </TouchableOpacity>
+    
           </View>
         
         ))}
