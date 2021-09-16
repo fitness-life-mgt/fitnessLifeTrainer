@@ -44,7 +44,9 @@ render(){
                     style={styles.signIn}
                     onPress={() => this.props.navigation.push('ApproveDietPlan',
                    )}>
-          <Text  style={styles. text_header_small}>Member Name - {item.email} </Text>
+          <Text  style={styles. text_header_small}>Member Name - {item.fname} {item.lname}</Text>
+          <Text  style={styles. text_header_small}></Text>
+          <Text  style={styles. text_header_small}>Description - {item.des} </Text>
           {/* <Text style={styles.text_header_small}>Age- {item.age}</Text>
           <Text style={styles.text_header_small}>weight(Kg)- {item.weight}</Text>
           <Text style={styles.text_header_small}>Height(cm) {item.height}</Text> */}
