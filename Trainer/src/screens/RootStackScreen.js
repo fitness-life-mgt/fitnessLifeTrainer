@@ -25,6 +25,7 @@ import Dietplans from './Dietplans';
 import EditProfile from './EditProfile';
 import MemberDetails from './MemberDetails';
 import ApproveList from './ApproveList';
+import trainerProgress from './trainerProgress';
 
 const RootStack = createStackNavigator();
 
@@ -80,7 +81,7 @@ const theme = {
             component={Tabs}
             options={{
               title: '',
-              
+              headerShown: false,
               headerTitleStyle: {
                 fontWeight: 'bold',
               },
@@ -163,6 +164,18 @@ const theme = {
               },
             }}
           />
+
+          <RootStack.Screen
+            name="trainerProgress"
+            component={trainerProgress}
+            options={{
+              title: '',
+              
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />    
         
           
           

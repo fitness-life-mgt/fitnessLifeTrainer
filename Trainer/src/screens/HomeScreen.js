@@ -31,8 +31,86 @@ const HomeScreen = ({navigation}) => {
               resizeMode="stretch"
             />
           </View>
+
+          <View style={styles.image_container}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('AppoinmentList')}>
+              <Image
+                source={require('../assests/images/Appointment_Requests.png')}
+                style={styles.image_click}
+                resizeMode="stretch"
+              />
+            
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Dietplans')}>
+              <Image
+                source={require('../assests/images/Dietplan_Requests.png')}
+                style={styles.image_click}
+                resizeMode="stretch"
+              />
+             
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.image_container}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ApproveList')}>
+              <Image
+                source={require('../assests/images/Approved_Appointments.png')}
+                style={styles.image_click}
+                resizeMode="stretch"
+              />
+            
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('trainerProgress')}>
+              <Image
+                source={require('../assests/images/Progress.png')}
+                style={styles.image_click}
+                resizeMode="stretch"
+              />
+             
+            </TouchableOpacity>
+          </View>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           {/*<View style={styles.alternativeLayoutButtonContainer}>*/}
-          <View style={styles.button}>
+          {/* <View style={styles.button}>
           <TouchableOpacity 
           onPress={() => navigation.navigate('AppoinmentList')}>
             <LinearGradient
@@ -88,6 +166,26 @@ const HomeScreen = ({navigation}) => {
             </LinearGradient>
           </TouchableOpacity>
         </View> 
+
+        <View style={styles.button}>
+          <TouchableOpacity 
+          onPress={() => navigation.navigate('trainerProgress')}>
+            <LinearGradient
+              colors={[colors.color3, colors.color4]}
+              >
+              <Text style={[
+                  styles.textBtn,
+                  // eslint-disable-next-line react-native/no-inline-styles
+                  {
+                    color: '#ffffff',
+                  },
+                ]}>
+               Progress
+                </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>  */}
+
 
         
         {/*</View>*/}
@@ -163,6 +261,20 @@ const styles = StyleSheet.create({
     height: 200,
     width: windowWidth,
     marginBottom: 20,
+  },
+  image_container: {
+    width: 200,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginRight:10
+    
+  },
+  image_click: {
+    marginLeft:20,
+    marginRight:10,
+    height: 150,
+    width: 150,
+    marginBottom: 10,
   },
   /*image_home2: {
     top: -25,

@@ -15,6 +15,7 @@ app.use("/approvediet",require("./routes/approvediet.js"));
 app.use("/appointmentList",require("./routes/appointmentList"));
 app.use("/approveList",require("./routes/approveList"));
 app.use("/dietplanList",require("./routes/dietplanList"));
+app.use("/trainerprogresslist",require("./routes/trainerprogresslist"));
 
 app.listen(8088, () => {
     console.log("Yey, your server is running on port 8088");

@@ -5,7 +5,7 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity
+  SectionList
 } from 'react-native';
 
 import colors from '../config/colors';
@@ -22,7 +22,7 @@ export default class App extends Component{
     // id,
 }
 componentDidMount(){
-  axios.get('http://localhost:8088/approveList' ).then(res=>{
+  axios.get('http://localhost:8088/trainerprogresslist' ).then(res=>{
         console.log(res);
       this.setState({
         data:res.data,
@@ -35,20 +35,16 @@ render(){
   return(
   
       <View style={styles.container}>
-      <Text style={styles.text_header}>Approved Appointment </Text>
+    
       <ScrollView>
         {this.state.data.map((item) => (
          
           <View style={styles.item}>
+        
+          <Text  style={styles.text_header_small}>Number of Approved Appointments - {item.count_1} </Text>
+          <Text  style={styles. text_header_small}></Text>
+          <Text  style={styles.text_header_small}>Number of Given Dietplans - {item.count_2} </Text>
          
-          <Text  style={styles. text_header_small}>Member Name - {item.fname} {item.lname}</Text>
-          <Text  style={styles. text_header_small}>Date - {item.adate} </Text>
-          <Text  style={styles. text_header_small}>Time  - {item.atime} </Text>
-          <Text  style={styles. text_header_small}>Zoom Link  - {item.azoom} </Text>
-          {/* <Text style={styles.text_header_small}>Age- {item.age}</Text>
-          <Text style={styles.text_header_small}>weight(Kg)- {item.weight}</Text>
-          <Text style={styles.text_header_small}>Height(cm) {item.height}</Text> */}
-    
           </View>
         
         ))}
@@ -72,15 +68,15 @@ const styles = StyleSheet.create({
   item: {
     marginTop: 24,
     padding: 30,
-    backgroundColor: '#ffe0cc',
+    backgroundColor: '#fee8cd',
     fontSize: 24
 
   },
 
   text_header_small: {
     color: colors.color2,
-    // fontWeight: 'bold',
-    fontSize: 15,
+    fontWeight: 'bold',
+    fontSize: 18,
     fontFamily: 'roboto',
   },
 
