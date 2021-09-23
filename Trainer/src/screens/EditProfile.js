@@ -10,6 +10,10 @@ import {
   StyleSheet,
   StatusBar,
   ScrollView,
+  Modal,
+  Alert,
+  Pressable,
+  Button,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
@@ -24,8 +28,8 @@ const EditProfile = ({navigation}) => {
   const [phonetext, setphonetext] = useState('');
   const [passwordtext, setpasswordtext] = useState('');
   const [cpasswordtext, setcpasswordtext] = useState('');
-
   
+  const [showWarning, setshowWarning] = useState(false);
 
   const Edit = ( telephone, password, cpassword) => {
     const x = {
@@ -37,11 +41,15 @@ const EditProfile = ({navigation}) => {
     };
 
     axios.post('http://localhost:8088/editprofile',x).then(res=>{
-      if(res.data==='SUCCESS')navigation.navigate('Tabs');
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      if (res.data == 'SUCCESS') {
+        setshowWarning(true);
+      } else {
+        console.log(res.data.msg);
+        Alert.alert('Failed!', res.data.msg.toString(), [
+          {text: 'Okay', onPress: () => console.log('alert closed')},
+        ]);
+      }
+    });
   };
 
   const [data, setData] = React.useState({
@@ -51,21 +59,42 @@ const EditProfile = ({navigation}) => {
     check_textInputChange: false,
     secureTextEntry: true,
     confirm_secureTextEntry: true,
+    isValidTelephone: true,
+    isValidPassword: true,
+    isValidConfirmPassword: true,
   });
 
   
 
   const handlePasswordChange = val => {
-    setData({
-      ...data,
-      password: val,
-    });
+    if (val.trim().length >= 8) {
+      setData({
+        ...data,
+        // password: val,
+        isValidPassword: true,
+      });
+    } else {
+      setData({
+        ...data,
+        // password: val,
+        isValidPassword: false,
+      });
+    }
   };
   const handleConfirmPasswordChange = val => {
-    setData({
-      ...data,
-      confirm_password: val,
-    });
+    if (val.trim().length >= 8) {
+      setData({
+        ...data,
+        // password: val,
+        isValidConfirmPassword: true,
+      });
+    } else {
+      setData({
+        ...data,
+        // password: val,
+        isValidConfirmPassword: false,
+      });
+    }
   };
 
   const updateSecureTextEntry = () => {
@@ -81,8 +110,19 @@ const EditProfile = ({navigation}) => {
       confirm_secureTextEntry: !data.confirm_secureTextEntry,
     });
   };
-
-
+  const handleTelephone = val => {
+    if (val.trim().length == 10) {
+      setData({
+        ...data,
+        isValidTelephone: true,
+      });
+    } else {
+      setData({
+        ...data,
+        isValidTelephone: false,
+      });
+    }
+  };
 
 
 
@@ -90,6 +130,31 @@ const EditProfile = ({navigation}) => {
   return (
     
       <View style={styles.container}>
+      <Modal
+        transparent
+        visible={showWarning}
+        animationType="fade"
+        hardwareAccelerated
+        onRequestClose={() => setshowWarning(false)}>
+        <View style={styles.centered_modal}>
+          <View style={styles.error_modal}>
+            <View style={styles.header_modal}>
+              <Text style={styles.header_text_modal}>Success!</Text>
+            </View>
+            <View style={styles.body_modal}>
+              <Text style={styles.body_text_modal}>
+                Details Updated
+              </Text>
+            </View>
+            <Pressable
+              style={styles.pressable_modal}
+              onPress={() => navigation.navigate('Tabs')}
+              android_ripple={{color: '#fff'}}>
+              <Text style={styles.pressable_text_modal}>Okay</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
       <View style={styles.header}>
         <StatusBar backgroundColor={colors.color2} barStyle="light-content" />
         <Text style={styles.text_header}>Edit Your Profile</Text>
@@ -110,12 +175,13 @@ const EditProfile = ({navigation}) => {
               name="phonetext"
               value={phonetext}
                  onChangeText={val => setphonetext(val)}
+                 onEndEditing={e => handleTelephone(e.nativeEvent.text)}
             />
-            {data.check_textInputChange ? (
-              <Animatable.View animation="bounceIn">
-                <Feather name="check-circle" color={colors.color2} size={20} />
+            {data.isValidTelephone ? null : (
+              <Animatable.View animation="fadeInLeft" duration={500}>
+                <Text style={styles.errorMsg}>Incorrect Contact Number!</Text>
               </Animatable.View>
-            ) : null}
+            )}
           </View>
 
           {/* password */}
@@ -129,6 +195,7 @@ const EditProfile = ({navigation}) => {
               name="passwordtext"
               value={passwordtext}
               onChangeText={val => setpasswordtext(val)}
+              onEndEditing={e => handlePasswordChange(e.nativeEvent.text)}
             />
             <TouchableOpacity onPress={updateSecureTextEntry}>
               {data.secureTextEntry ? (
@@ -149,6 +216,9 @@ const EditProfile = ({navigation}) => {
               name="cpasswordtext"
               value={cpasswordtext}
               onChangeText={val => setcpasswordtext(val)}
+              onEndEditing={e =>
+                handleConfirmPasswordChange(e.nativeEvent.text)
+              }
             />
             <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
               {data.secureTextEntry ? (
@@ -158,7 +228,13 @@ const EditProfile = ({navigation}) => {
               )}
             </TouchableOpacity>
           </View>
-
+          {data.isValidConfirmPassword ? null : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <Text style={styles.errorMsg}>
+                Password must be 8 Characters long
+              </Text>
+            </Animatable.View>
+          )}
           <View style={styles.button}>
           <TouchableOpacity
             onPress={() =>
@@ -289,4 +365,62 @@ const styles = StyleSheet.create({
     
   },
   
+  centered_modal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#00000070',
+  },
+  error_modal: {
+    width: 270,
+    height: 150,
+    backgroundColor: colors.color5,
+    // borderWidth: 1,
+    // borderColor: colors.color2,
+    borderRadius: 10,
+  },
+  header_modal: {
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: colors.color3,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+  header_text_modal: {
+    fontFamily: 'roboto',
+    fontSize: 19,
+    color: colors.color2,
+    fontWeight: 'bold',
+  },
+  body_modal: {
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  body_text_modal: {
+    fontFamily: 'roboto',
+    fontSize: 17,
+    color: colors.color1,
+    marginTop: -20,
+  },
+  pressable_modal: {
+    // borderTopWidth: 1,
+    // borderColor: colors.color1,
+    backgroundColor: colors.color4,
+    height: 50,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  pressable_text_modal: {
+    fontFamily: 'roboto',
+    fontSize: 18,
+    color: colors.color5,
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    paddingTop: 10,
+    fontWeight: 'bold',
+  },
 });

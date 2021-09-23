@@ -58,7 +58,7 @@ const theme = {
             component={LoginScreen}
             options={{
               title: '',
-              
+              headerShown: false,
               headerTitleStyle: {
                 fontWeight: 'bold',
               },

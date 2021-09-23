@@ -7,13 +7,14 @@ const  saltRounds=10;
 
 router.post("/",(req,res)=>{
     
-    const date=req.body.date;
-    const time=req.body.time;
+   /* const date=req.body.date;
+    const time=req.body.time;*/
     const zoom=req.body.zoom;
     
-        let sql=`INSERT INTO appointment (date, time, zoom, type, email, trainerId) values(?,?,?,'1','lakmali@gmail.com','1')`;
+    //   let sql=`INSERT INTO appointment ( zoom, type, email, trainerId) values(?,?,?,'1','lakmali@gmail.com','1')`;
+        let sql=`UPDATE appointment SET zoom=?, type='1' WHERE email = 'cmwick@gmail.com' `;
         
-    db.query(sql,[date ,time, zoom ],(err,result)=>{
+    db.query(sql,[ zoom ],(err,result)=>{
         console.log(err);
     });
     

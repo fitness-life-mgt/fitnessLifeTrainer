@@ -45,7 +45,7 @@ render(){
                     onPress={() => this.props.navigation.push('Approve',
                    )}>
           <Text  style={styles. text_header_small}>Member Name - {item.fname} {item.lname}</Text>
-          <Text  style={styles. text_header_small}>Date - {item.adate} </Text>
+          <Text  style={styles. text_header_small}>Date - {item.adate.substring(0, 10)} </Text>
           <Text  style={styles. text_header_small}>Time  - {item.atime} </Text>
           {/* <Text style={styles.text_header_small}>Age- {item.age}</Text>
           <Text style={styles.text_header_small}>weight(Kg)- {item.weight}</Text>
@@ -92,4 +92,5 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontFamily: 'roboto',
   },
+  
 });

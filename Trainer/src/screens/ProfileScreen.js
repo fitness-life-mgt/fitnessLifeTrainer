@@ -26,7 +26,7 @@ const ProfileScreen = ({navigation}) => {
           <View style={styles.body_details}>
             {/* <Text style={styles.textDetails}>Name :</Text> */}
             <Text style={styles.textDetailsLarge}>Kasun Lakmal</Text>
-            <Text style={styles.textDetailsMedium}>kasun@flife.com</Text>
+            <Text style={styles.textDetailsMedium}>kasunflife@gmail.com</Text>
           </View>
         </Animatable.View>
         <View style={styles.button_package}>

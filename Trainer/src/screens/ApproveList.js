@@ -42,7 +42,7 @@ render(){
           <View style={styles.item}>
          
           <Text  style={styles. text_header_small}>Member Name - {item.fname} {item.lname}</Text>
-          <Text  style={styles. text_header_small}>Date - {item.adate} </Text>
+          <Text  style={styles. text_header_small}>Date - {item.adate.substring(0, 10)} </Text>
           <Text  style={styles. text_header_small}>Time  - {item.atime} </Text>
           <Text  style={styles. text_header_small}>Zoom Link  - {item.azoom} </Text>
           {/* <Text style={styles.text_header_small}>Age- {item.age}</Text>

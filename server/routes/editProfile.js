@@ -17,16 +17,17 @@ router.post("/",(req,res)=>{
     const cpassword=req.body.cpassword;
     
 
-
+    console.log("Inside Router!");
   // Simple validation
 
-    if( !telephone||!password||!cpassword){
-        return res.status(400).json({msg:"Please enter all fields"});
+    if(!telephone||!password||!cpassword){
+        console.log("Empty Feilds!");
+        return res.json({msg:"Please enter all fields"});
 
     }
 
     if(password!==cpassword){
-      return res.status(400).json({msg:"Please Confim your password"});
+        return res.json({msg:"New Passwords Do Not Match!"});
     }
 
 

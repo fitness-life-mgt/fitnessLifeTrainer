@@ -28,11 +28,18 @@ const LoginScreen = ({navigation}) => {
       password: password,
     };
     axios.post('http://localhost:8088/login',x).then(res=>{
-      if(res.data==='SUCCESS')navigation.navigate('Tabs');
-
-    }).catch(error=>{
-      console.log(error);
+      if (res.data == 'SUCCESS') {
+        navigation.navigate('Tabs');
+      } else {
+        console.log(res.data.msg);
+        Alert.alert('Login Error!', res.data.msg.toString(), [
+          {text: 'Okay', onPress: () => console.log('alert closed')},
+        ]);
+      }
     });
+    //.catch(error=>{
+    //  console.log(error);
+    //});
   };
 
   const [data, setData] = React.useState({
@@ -40,15 +47,20 @@ const LoginScreen = ({navigation}) => {
     password: '',
     check_textInputChange: false,
     secureTextEntry: true,
+    confirm_secureTextEntry: true,
+    isValidPassword: true,
+    
   });
 
-  const textInputChange = val => {
+  const textInputChangeEmail = val => {
     if (val.lenght != 0) {
       setData({
         ...data,
         email: val,
         check_textInputChange: true,
-      });
+      },
+      setemailtext(val),
+      );
     } else {
       setData({
         ...data,
@@ -59,16 +71,32 @@ const LoginScreen = ({navigation}) => {
   };
 
   const handlePasswordChange = val => {
-    setData({
-      ...data,
-      password: val,
-    });
+    if (val.trim().length >= 8) {
+      setData({
+        ...data,
+        // password: val,
+        isValidPassword: true,
+      });
+    } else {
+      setData({
+        ...data,
+        // password: val,
+        isValidPassword: false,
+      });
+    }
   };
+
 
   const updateSecureTextEntry = () => {
     setData({
       ...data,
       secureTextEntry: !data.secureTextEntry,
+    });
+  };
+  const updateConfirmSecureTextEntry = () => {
+    setData({
+      ...data,
+      confirm_secureTextEntry: !data.confirm_secureTextEntry,
     });
   };
 
@@ -88,7 +116,7 @@ const LoginScreen = ({navigation}) => {
             autoCapitalize="none"
             name="emailtext"
             value={emailtext}
-            onChangeText={val => setemailtext(val)}
+            onChangeText={val => textInputChangeEmail(val)}
             
           />
           {data.check_textInputChange ? (
@@ -109,6 +137,7 @@ const LoginScreen = ({navigation}) => {
             name="passwordtext"
             value={passwordtext}
             onChangeText={val => setpasswordtext(val)}
+            onEndEditing={e => handlePasswordChange(e.nativeEvent.text)}
           />
           <TouchableOpacity onPress={updateSecureTextEntry}>
             {data.secureTextEntry ? (
@@ -118,6 +147,9 @@ const LoginScreen = ({navigation}) => {
             )}
           </TouchableOpacity>
         </View>
+        
+
+
         <View style={styles.button}>
         <TouchableOpacity onPress={()=>  login(emailtext, passwordtext)     }>
           <LinearGradient
@@ -136,7 +168,7 @@ const LoginScreen = ({navigation}) => {
           </LinearGradient>
           </TouchableOpacity> 
         </View>
-        <View style={styles.buttonReg}>
+      { /* <View style={styles.buttonReg}>
           <TouchableOpacity
               
                onPress={() => navigation.navigate('RegisterScreen')}
@@ -159,7 +191,7 @@ const LoginScreen = ({navigation}) => {
                 Register
               </Text>
             </TouchableOpacity>
-          </View>
+          </View>*/}
       </Animatable.View>
     </View>
   );

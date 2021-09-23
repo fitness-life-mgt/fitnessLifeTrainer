@@ -1,6 +1,7 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import colors from '../config/colors';
 
@@ -23,7 +24,7 @@ const Tabs = () => {
           tabBarLabel: 'Home',
           tabBarColor: 'yellow',
           tabBarIcon: ({color}) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
+            <MaterialCommunityIcons name="home" color={color} size={27} />
           ),
         }}
       />
@@ -34,7 +35,8 @@ const Tabs = () => {
         options={{
           tabBarLabel: 'Members',
           tabBarIcon: ({color}) => (
-            <MaterialCommunityIcons name="music" color={color} size={26} />
+            //<MaterialCommunityIcons name="music" color={color} size={26} />
+            <FontAwesome name="users" color={color} size={25} />
           ),
         }}
       />
@@ -44,7 +46,7 @@ const Tabs = () => {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({color}) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
+            <MaterialCommunityIcons name="account-circle" color={color} size={26} />
           ),
         }}
       />
@@ -54,7 +56,7 @@ const Tabs = () => {
         options={{
           tabBarLabel: 'About Us',
           tabBarIcon: ({color}) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
+            <MaterialCommunityIcons name="account-details" color={color} size={26} />
           ),
         }}
       />

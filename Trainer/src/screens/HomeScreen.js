@@ -19,7 +19,7 @@ const HomeScreen = ({navigation}) => {
     <View style={styles.view}>
       <View style={styles.header}>
         <View>
-          <Text style={styles.headerText}>Hi Viveka!</Text>
+          <Text style={styles.headerText}>Hi Kasun!</Text>
         </View>
       </View>
       <View style={styles.body}>
